@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ThreadHaven.Models;
 
 namespace ThreadHaven.Controllers
 {
@@ -33,7 +34,15 @@ namespace ThreadHaven.Controllers
                 //we have no id so takes user back to shop index where they can choose a category 
                 return RedirectToAction("Index");
             }
-            return View();
+
+            //use product model to make an in-memory list of fake products 
+            var products = new List<Product>();
+            for(int i=1; i<=5; i++)
+            {
+                products.Add(new Product { Id = i, Name = "Product"+i, Description="desc" ,Price=00 });
+            }
+            //now pass the product list to the view for display 
+            return View(products);
         }
     }
 }
